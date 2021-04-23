@@ -16,8 +16,11 @@ function Search() {
         //const response = firestore.collection("Books").where('title', 'array-contains', text);
         const response = firestore.collection("Books").where('title', '>=', text).where('title', '<=', text+ '\uf8ff');
 
+        //const response = firestore.collection("Books").where('title', '>=', '\uf8ff'+text).where('title', '<=','\uf8ff'+ text);
+      //LIKE '공정' + '어떤문자'
+      // LIKE '%공정'  
         // const response = firebase.firestore();
-        const data = await response.get();
+        const data = await response.get(); // get() vs snapshot() ?? 
 
         const newBooks = data.docs.map((book) => ({
             id: book.id,
