@@ -26,9 +26,11 @@ function SearchNaver() {
         const searchBooks = await axios.get(
             //'https://openapi.naver.com/v1/search/book.json'
             url+'v1/search/book.json'
+            //url+'v1/search/book_adv.xml'
             ,{
                 params:{
                     query: search
+                    //,d_titl : search
                     //,display: 20
                 } 
                 ,headers: {
@@ -48,7 +50,7 @@ function SearchNaver() {
             
         //     setBooks([...books, item]);
         //   });
-        //console.log(searchBooks.data.items);
+        //console.log(searchBooks.data);
         if(loading){
             console.log("업데이트");
             setBooks(...books, searchBooks.data.items);
@@ -56,7 +58,7 @@ function SearchNaver() {
         setLoading(false);
         //console.log(searchBooks.data.items);
         //setBooks(searchBooks);
-        console.log(books);
+        console.log(searchBooks.data.items);
     };
 
     const onChange = (e) => {
@@ -74,24 +76,27 @@ function SearchNaver() {
                     <span className="loader__text">검색하세요.</span>
                 </div>
                 ) : (
-                    <div className="movies">
-                    {books.map(book => (
-                      <Book
-                        key={book.isbn}
-                        id={book.isbn}
-                        author        = {book.author} 
-                        description   = {book.description}
-                        discount      = {book.discount}
-                        image         = {book.image}
-                        isbn          = {book.isbn}
-                        link          = {book.link}
-                        price         = {book.price}
-                        pubdate       = {book.pubdate}
-                        publisher     = {book.publisher}
-                        title         = {book.title}
-                      />
-                    ))}
-                  </div>
+                   
+                      <div className="movies">
+                      
+                      {books.map(book => (
+                        <Book
+                          key={book.isbn}
+                          id={book.isbn}
+                          author        = {book.author} 
+                          description   = {book.description}
+                          discount      = {book.discount}
+                          image         = {book.image}
+                          isbn          = {book.isbn}
+                          link          = {book.link}
+                          price         = {book.price}
+                          pubdate       = {book.pubdate}
+                          publisher     = {book.publisher}
+                          title         = {book.title}
+                        />
+                      ))}
+                    </div>
+                    
                 )}
             </section>
            {/* <div className="movies">
